@@ -44,7 +44,12 @@ class BackgroundVideoState extends State<BackgroundVideo> {
         _reverseController.initialize(),
       ]);
 
-      print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
+      _forwardController.pause();
+      _reverseController.play();
+      _reverseController.pause();
+      _forwardController.seekTo(Duration.zero);
+      _reverseController.seekTo(Duration.zero);
+
       setState(() {
         print('Both controllers initialized');
         _forwardController.setVolume(0);
@@ -68,7 +73,6 @@ class BackgroundVideoState extends State<BackgroundVideo> {
 
         print('Switching playback to ${_playingForward ? 'Reverse' : 'Forward'}');
         print('forwardController position: ${_forwardController.value.position} reverseController position: ${_reverseController.value.position}');
-        print('forwardController duration: ${_forwardController.value.duration} reverseController duration: ${_reverseController.value.duration}');
         print('\n');
 
         // When the current video ends, switch to the other video
@@ -77,9 +81,11 @@ class BackgroundVideoState extends State<BackgroundVideo> {
           // Play the next video
           if (_playingForward) {
             _forwardController.play();
+            _reverseController.pause();
             _reverseController.seekTo(Duration.zero);
           } else {
             _reverseController.play();
+            _forwardController.pause();
             _forwardController.seekTo(Duration.zero);
           }
         });
@@ -89,7 +95,7 @@ class BackgroundVideoState extends State<BackgroundVideo> {
 
   @override
   Widget build(BuildContext context) {
-    print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
+    // print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
     return (_forwardController.value.isInitialized && _reverseController.value.isInitialized)
       ? SizedBox.expand(
           child: FittedBox(
