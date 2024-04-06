@@ -47,6 +47,8 @@ class BackgroundVideoState extends State<BackgroundVideo> {
       print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
       setState(() {
         print('Both controllers initialized');
+        _forwardController.setVolume(0);
+        _reverseController.setVolume(0);
         _forwardController.play(); // Start playing the first video if initialization is successful
       });
 
