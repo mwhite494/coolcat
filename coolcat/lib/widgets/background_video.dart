@@ -11,19 +11,45 @@ class BackgroundVideo extends StatefulWidget {
 class BackgroundVideoState extends State<BackgroundVideo> {
   late VideoPlayerController _controller;
 
+  String currentVideo = 'assets/videos/catvideo.mp4';
+  final String forwardVideo = 'assets/videos/catvideo.mp4';
+  final String reverseVideo = 'assets/videos/catvideo_reversed.mp4';
+
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('assets/videos/catvideo.mp4')
+    _initializeVideoPlayer();
+  }
+
+  void _initializeVideoPlayer() {
+    _controller = VideoPlayerController.asset(currentVideo)
       ..initialize().then((_) {
         _controller.play();
-        _controller.setLooping(true);
+        _controller.addListener(_checkVideo);
         setState(() {});
       });
   }
 
+  void _checkVideo() {
+    if (_controller.value.position == _controller.value.duration) {
+      // When video finishes, switch the video source
+      setState(() {
+        currentVideo = currentVideo == forwardVideo ? reverseVideo : forwardVideo;
+      });
+      _controller.removeListener(_checkVideo);
+      _controller.dispose();
+      _initializeVideoPlayer();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+      //   return _controller.value.isInitialized
+  //       ? AspectRatio(
+  //           aspectRatio: _controller.value.aspectRatio,
+  //           child: VideoPlayer(_controller),
+  //         )
+  //       : Container();
     print('Width: ${_controller.value.size.width} Height: ${_controller.value.size.height}');
     return SizedBox.expand(
       child: FittedBox(
@@ -39,7 +65,9 @@ class BackgroundVideoState extends State<BackgroundVideo> {
 
   @override
   void dispose() {
-    super.dispose();
+    _controller.removeListener(_checkVideo);
     _controller.dispose();
+    super.dispose();
   }
+
 }
