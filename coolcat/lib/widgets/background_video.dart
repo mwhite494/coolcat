@@ -9,64 +9,103 @@ class BackgroundVideo extends StatefulWidget {
 }
 
 class BackgroundVideoState extends State<BackgroundVideo> {
-  late VideoPlayerController _controller;
-
-  String currentVideo = 'assets/videos/catvideo.mp4';
-  final String forwardVideo = 'assets/videos/catvideo.mp4';
-  final String reverseVideo = 'assets/videos/catvideo_reversed.mp4';
+  late VideoPlayerController _forwardController;
+  late VideoPlayerController _reverseController;
+  bool _playingForward = true; // A flag to indicate which video to show
 
   @override
   void initState() {
     super.initState();
-    _initializeVideoPlayer();
+    // Initialize both video player controllers
+    // _forwardController = VideoPlayerController.asset('assets/videos/catvideo.mp4')
+    //   ..initialize().then((_) => setState(() {
+    //     print('${_forwardController.value.isInitialized}');
+    //     print('forwardController initialized');
+    //   }));
+    // _reverseController = VideoPlayerController.asset('assets/videos/catvideo_reversed.mp4')
+    //   ..initialize().then((_) => setState(() {
+    //     print('reverseController initialized');
+    //   }));
+
+    // _forwardController.addListener(_onVideoEnd);
+    // _reverseController.addListener(_onVideoEnd);
+
+    // _forwardController.play();
+    _initializeVideoControllers();
   }
 
-  void _initializeVideoPlayer() {
-    _controller = VideoPlayerController.asset(currentVideo)
-      ..initialize().then((_) {
-        _controller.play();
-        _controller.addListener(_checkVideo);
-        setState(() {});
-      });
-  }
+  Future<void> _initializeVideoControllers() async {
+    try {
+      _forwardController = VideoPlayerController.asset('assets/videos/catvideo.mp4');
+      _reverseController = VideoPlayerController.asset('assets/videos/catvideo_reversed.mp4');
 
-  void _checkVideo() {
-    if (_controller.value.position == _controller.value.duration) {
-      // When video finishes, switch the video source
+      await Future.wait([
+        _forwardController.initialize(),
+        _reverseController.initialize(),
+      ]);
+
+      print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
       setState(() {
-        currentVideo = currentVideo == forwardVideo ? reverseVideo : forwardVideo;
+        print('Both controllers initialized');
+        _forwardController.play(); // Start playing the first video if initialization is successful
       });
-      _controller.removeListener(_checkVideo);
-      _controller.dispose();
-      _initializeVideoPlayer();
+
+      // Add Listeners
+      _forwardController.addListener(_onVideoEnd);
+      _reverseController.addListener(_onVideoEnd);
+    } catch (error) {
+      print('An error occurred during video initialization: $error');
+      // Handle the error appropriately here. For example, showing an error message on the UI.
+    }
+  }
+
+  void _onVideoEnd() {
+    if (_forwardController.value.isInitialized && _reverseController.value.isInitialized) {
+      if ((_playingForward && _forwardController.value.position >= _forwardController.value.duration) ||
+          (!_playingForward && _reverseController.value.position >= _reverseController.value.duration)) {
+
+        print('Switching playback to ${_playingForward ? 'Reverse' : 'Forward'}');
+        print('forwardController position: ${_forwardController.value.position} reverseController position: ${_reverseController.value.position}');
+        print('forwardController duration: ${_forwardController.value.duration} reverseController duration: ${_reverseController.value.duration}');
+        print('\n');
+
+        // When the current video ends, switch to the other video
+        setState(() {
+          _playingForward = !_playingForward;
+          // Play the next video
+          if (_playingForward) {
+            _forwardController.play();
+            _reverseController.seekTo(Duration.zero);
+          } else {
+            _reverseController.play();
+            _forwardController.seekTo(Duration.zero);
+          }
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-      //   return _controller.value.isInitialized
-  //       ? AspectRatio(
-  //           aspectRatio: _controller.value.aspectRatio,
-  //           child: VideoPlayer(_controller),
-  //         )
-  //       : Container();
-    print('Width: ${_controller.value.size.width} Height: ${_controller.value.size.height}');
-    return SizedBox.expand(
-      child: FittedBox(
-        fit: BoxFit.cover,
-        child: SizedBox(
-          width: _controller.value.size.width,
-          height: _controller.value.size.height,
-          child: VideoPlayer(_controller),
-        ),
-      ),
-    );
+    print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
+    return (_forwardController.value.isInitialized && _reverseController.value.isInitialized)
+      ? SizedBox.expand(
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: SizedBox(
+              width: _playingForward ? _forwardController.value.size.width : _reverseController.value.size.width,
+              height: _playingForward ? _forwardController.value.size.height : _reverseController.value.size.height,
+              child: VideoPlayer(_playingForward ? _forwardController : _reverseController),
+            ),
+          ),
+        )
+      : Container();
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_checkVideo);
-    _controller.dispose();
+    _forwardController.dispose();
+    _reverseController.dispose();
     super.dispose();
   }
 
