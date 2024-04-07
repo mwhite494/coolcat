@@ -125,7 +125,10 @@ class BackgroundVideoState extends State<BackgroundVideo> {
             ),
           ),
         )
-      : Container();
+      : Container(
+        color: Colors.black,
+      );
+    // Show forward and reverse videos side by side (for debugging)
     // return Row(
     //   mainAxisAlignment: MainAxisAlignment.center,
     //   children: <Widget>[
