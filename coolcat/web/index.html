@@ -48,7 +48,16 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+          engineInitializer.initializeEngine({
+            /* 
+            * Specifying to have the renderer be html opposed to CanvasKit (default for Flutter web apps)
+            * Benefits:
+            * 1. This reduces the size of the web app
+            * 2. Provides better SEO
+            * 3. Fixes bugs related to the "boomerang" video effect on Firefox
+            */
+            renderer: 'html',
+          }).then(function(appRunner) {
             appRunner.runApp();
           });
         }
