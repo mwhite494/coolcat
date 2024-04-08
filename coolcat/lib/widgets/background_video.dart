@@ -1,3 +1,4 @@
+import 'package:coolcat/constants/index.dart' show Numbers;
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -111,15 +112,17 @@ class BackgroundVideoState extends State<BackgroundVideo> {
     // print('inside build method forwardController initialized: ${_forwardController.value.isInitialized} reverseController intialized: ${_reverseController.value.isInitialized}');
     // print('inside build method forwardController hasError: ${_forwardController.value.hasError} reverseController hasError: ${_reverseController.value.hasError}');
     // print('inside build method forwardController errorDescription: ${_forwardController.value.errorDescription} reverseController errorDescription: ${_reverseController.value.errorDescription}');
+    
+    VideoPlayerController currentController = _playingForward ? _forwardController : _reverseController;
 
     return (_forwardController.value.isInitialized && _reverseController.value.isInitialized)
       ? SizedBox.expand(
           child: FittedBox(
             fit: BoxFit.cover,
             child: SizedBox(
-              width: _playingForward ? _forwardController.value.size.width : _reverseController.value.size.width,
-              height: _playingForward ? _forwardController.value.size.height : _reverseController.value.size.height,
-              child: VideoPlayer(_playingForward ? _forwardController : _reverseController),
+              width: currentController.value.size.width,
+              height: currentController.value.size.height,
+              child: VideoPlayer(currentController),
             ),
           ),
         )
