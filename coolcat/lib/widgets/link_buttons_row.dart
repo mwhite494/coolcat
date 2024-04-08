@@ -35,10 +35,10 @@ class _TextLinkButton extends StatelessWidget {
     bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
     double fontSize = isMobile ? NumberConstants.textButtonFontSizeSmall : NumberConstants.textButtonFontSizeLarge;
     
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: HoverButton(
-        onPressed: () => _launchURL(url),
+    return HoverButton(
+      onPressed: () => _launchURL(url),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
         child: Text(
           text,
           style: TextStyle(
@@ -60,17 +60,17 @@ class _IconLinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-      child: HoverButton(
-        scale: 1.3,
-        onPressed: () => _launchURL(url),
+    return HoverButton(
+      scale: 1.3,
+      onPressed: () => _launchURL(url),
+      child: Padding(
+        padding: const EdgeInsets.all(18),
         child: Image.asset(
           imagePath,
           width: 24,
           height: 24,
         ),
-      ),
+      )
     );
   }
 }

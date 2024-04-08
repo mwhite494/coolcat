@@ -12,7 +12,7 @@ class NumberConstants {
   // Padding
   static const double paddingTopLarge = 60.0;
   static const double paddingTopSmall = 48.0;
-  static const double paddingBottomLarge = 60.0;
-  static const double paddingBottomSmall = 48.0;
+  static const double paddingBottomLarge = 42.0;
+  static const double paddingBottomSmall = 32.0;
 
 }

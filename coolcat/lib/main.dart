@@ -19,10 +19,7 @@ class MyApp extends StatelessWidget {
             Column(
             children: [
               Header(),
-              Padding(
-                padding: EdgeInsets.only(top: 12.0),
-                child: LinkButtonsRow(),
-              )
+              LinkButtonsRow(),
             ],
           ),
             OpenManifestoButton()

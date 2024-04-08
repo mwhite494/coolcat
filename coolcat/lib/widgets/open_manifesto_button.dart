@@ -35,14 +35,17 @@ class OpenManifestoButton extends StatelessWidget {
             ),
             HoverButton(
               onPressed: () => showManifesto(context),
-              child: Text(
-                'MANIFESTO',
-                style: TextStyle(
-                  fontSize: fontSize,
-                  color: Colors.white,
-                  fontFamily: 'GloriaHallelujah',
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+                child: Text(
+                  'MANIFESTO',
+                  style: TextStyle(
+                    fontSize: fontSize,
+                    color: Colors.white,
+                    fontFamily: 'GloriaHallelujah',
+                  ),
                 ),
-              ),
+              )
             )
           ],
         ),
