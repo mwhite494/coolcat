@@ -14,17 +14,11 @@ class Manifesto extends StatelessWidget {
       child: SafeArea(
         child: Stack(
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(48, 48, 48, 0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(48, 48, 48, 0),
               child: SingleChildScrollView(
-                child: Text(
-                  TextConstants.manifesto,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.normal,
-                  ),
+                child: RichText(
+                  text: TextConstants.manifesto(24),
                 ),
               ),
             ),

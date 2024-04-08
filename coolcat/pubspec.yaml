@@ -68,6 +68,10 @@ flutter:
         - asset: assets/fonts/GloriaHallelujah-Regular.ttf
     - family: Roboto
       fonts:
+        - asset: assets/fonts/Roboto-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
         - asset: assets/fonts/Roboto-Regular.ttf
           weight: 400
         - asset: assets/fonts/Roboto-Bold.ttf
