@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:coolcat/constants/index.dart' show Numbers;
+import 'package:coolcat/constants/index.dart' show NumberConstants;
+import 'package:coolcat/widgets/index.dart' show HoverButton, Manifesto;
 import 'package:flutter/material.dart';
 
 class OpenManifestoButton extends StatelessWidget {
@@ -10,13 +11,13 @@ class OpenManifestoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < Numbers.mobileScreenWidthThreshold;
-    double fontSize = isMobile ? Numbers.textButtonFontSizeSmall : Numbers.textButtonFontSizeLarge;
+    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    double fontSize = isMobile ? NumberConstants.textButtonFontSizeSmall : NumberConstants.textButtonFontSizeLarge;
 
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: EdgeInsets.only(bottom: isMobile ? Numbers.paddingBottomSmall : Numbers.paddingBottomLarge),
+        padding: EdgeInsets.only(bottom: isMobile ? NumberConstants.paddingBottomSmall : NumberConstants.paddingBottomLarge),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -32,17 +33,35 @@ class OpenManifestoButton extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              'MANIFESTO',
-              style: TextStyle(
-                fontSize: fontSize,
-                color: Colors.white,
-                fontFamily: 'GloriaHallelujah',
+            HoverButton(
+              onPressed: () => showManifesto(context),
+              child: Text(
+                'MANIFESTO',
+                style: TextStyle(
+                  fontSize: fontSize,
+                  color: Colors.white,
+                  fontFamily: 'GloriaHallelujah',
+                ),
               ),
-            ),
+            )
           ],
         ),
       )
     );
   }
+
+  void showManifesto(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      constraints: const BoxConstraints(
+        maxWidth: double.infinity
+      ),
+      builder: (BuildContext context) {
+        return const Manifesto();
+      },
+    );
+  }
+
 }

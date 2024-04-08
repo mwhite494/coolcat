@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:coolcat/constants/index.dart' show Numbers;
+import 'package:coolcat/constants/index.dart' show NumberConstants;
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -11,13 +11,13 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < Numbers.mobileScreenWidthThreshold;
-    double fontSize = isMobile ? Numbers.headerFontSizeSmall : Numbers.headerFontSizeLarge;
+    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    double fontSize = isMobile ? NumberConstants.headerFontSizeSmall : NumberConstants.headerFontSizeLarge;
 
     return Align(
       alignment: Alignment.topCenter,
       child: Padding(
-        padding: EdgeInsets.only(top: isMobile ? Numbers.paddingTopSmall : Numbers.paddingTopLarge), // Adjust padding as needed
+        padding: EdgeInsets.only(top: isMobile ? NumberConstants.paddingTopSmall : NumberConstants.paddingTopLarge), // Adjust padding as needed
         child: Text(
           "STAY F*KIN COOL",
           style: TextStyle(

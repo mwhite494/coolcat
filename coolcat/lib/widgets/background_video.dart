@@ -1,4 +1,4 @@
-import 'package:coolcat/constants/index.dart' show Numbers;
+import 'package:coolcat/constants/index.dart' show NumberConstants;
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 

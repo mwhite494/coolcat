@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:coolcat/constants/index.dart' show Numbers;
-import 'package:coolcat/widgets/index.dart';
+import 'package:coolcat/constants/index.dart' show NumberConstants;
+import 'package:coolcat/widgets/index.dart' show HoverButton;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,8 +32,8 @@ class _TextLinkButton extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < Numbers.mobileScreenWidthThreshold;
-    double fontSize = isMobile ? Numbers.textButtonFontSizeSmall : Numbers.textButtonFontSizeLarge;
+    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    double fontSize = isMobile ? NumberConstants.textButtonFontSizeSmall : NumberConstants.textButtonFontSizeLarge;
     
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),

@@ -1,4 +1,4 @@
-class Numbers {
+class NumberConstants {
 
   // Cut off screen width for moble
   static const double mobileScreenWidthThreshold = 600.0;
