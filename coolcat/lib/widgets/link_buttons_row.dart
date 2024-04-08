@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:coolcat/constants/index.dart' show Numbers;
 import 'package:coolcat/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,16 +30,21 @@ class _TextLinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    bool isMobile = min(screenWidth, screenHeight) < Numbers.mobileScreenWidthThreshold;
+    double fontSize = isMobile ? Numbers.textButtonFontSizeSmall : Numbers.textButtonFontSizeLarge;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: HoverButton(
         onPressed: () => _launchURL(url),
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 24, // Adjust the font size as needed
-            color: Colors.white, // Set the text color to white
-            fontFamily: 'GloriaHallelujah', // Use your custom font
+          style: TextStyle(
+            fontSize: fontSize,
+            color: Colors.white,
+            fontFamily: 'GloriaHallelujah',
           ),
         ),
       )
