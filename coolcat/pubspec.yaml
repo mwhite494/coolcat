@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  url_launcher: ^6.2.5
   video_player: ^2.8.5
 
 dev_dependencies:
@@ -56,8 +57,15 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/telegram_logo.png.webp
+    - assets/images/x_logo.png
     - assets/videos/catvideo.mp4
     - assets/videos/catvideo_reversed.mp4
+
+  fonts:
+    - family: GloriaHallelujah
+      fonts:
+        - asset: assets/fonts/GloriaHallelujah-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

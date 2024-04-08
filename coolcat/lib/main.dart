@@ -12,7 +12,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Scaffold(
-        body: BackgroundVideo(),
+        body: Stack(
+          children: <Widget>[
+            BackgroundVideo(),
+            Column(
+            children: [
+              Header(),
+              Padding(
+                padding: EdgeInsets.only(top: 12.0),
+                child: LinkButtonsRow(),
+              )
+            ],
+          ),
+            OpenManifestoButton()
+          ],
+        ),
       ),
     );
   }

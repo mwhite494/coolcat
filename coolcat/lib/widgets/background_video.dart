@@ -28,14 +28,13 @@ class BackgroundVideoState extends State<BackgroundVideo> {
         _forwardController.initialize(),
         _reverseController.initialize(),
       ]);
-      print('inside intialize method forwardController initialized: ${_forwardController.value.isInitialized} reverseController intialized: ${_reverseController.value.isInitialized}');
 
       // Video must be muted for autoplay to work on Chrome
       _forwardController.setVolume(0);
       _reverseController.setVolume(0);
 
       setState(() {
-        print('Both controllers initialized');
+        // print('Both controllers initialized');
         _forwardController.play(); // Start playing the first video if initialization is successful
       });
 
@@ -95,12 +94,12 @@ class BackgroundVideoState extends State<BackgroundVideo> {
           if (mounted) {
             currentController.pause().then((_) {
               currentController.seekTo(Duration.zero);
-              print('Seeked previous controller to zero');
+              // print('Seeked previous controller to zero');
             });
           }
         });
 
-        print('Switched playback to ${_playingForward ? 'Forward' : 'Reverse'}');
+        // print('Switched playback to ${_playingForward ? 'Forward' : 'Reverse'}');
       }
     }
   }
@@ -108,11 +107,10 @@ class BackgroundVideoState extends State<BackgroundVideo> {
 
   @override
   Widget build(BuildContext context) {
-    // print('forwardController initialized: ${_forwardController.value.isInitialized} reverseController initialized: ${_reverseController.value.isInitialized}');
-    print('inside build method with playback in ${_playingForward ? 'Forward' : 'Reverse'}');
-    print('inside build method forwardController initialized: ${_forwardController.value.isInitialized} reverseController intialized: ${_reverseController.value.isInitialized}');
-    print('inside build method forwardController hasError: ${_forwardController.value.hasError} reverseController hasError: ${_reverseController.value.hasError}');
-    print('inside build method forwardController errorDescription: ${_forwardController.value.errorDescription} reverseController errorDescription: ${_reverseController.value.errorDescription}');
+    // print('inside build method with playback in ${_playingForward ? 'Forward' : 'Reverse'}');
+    // print('inside build method forwardController initialized: ${_forwardController.value.isInitialized} reverseController intialized: ${_reverseController.value.isInitialized}');
+    // print('inside build method forwardController hasError: ${_forwardController.value.hasError} reverseController hasError: ${_reverseController.value.hasError}');
+    // print('inside build method forwardController errorDescription: ${_forwardController.value.errorDescription} reverseController errorDescription: ${_reverseController.value.errorDescription}');
 
     return (_forwardController.value.isInitialized && _reverseController.value.isInitialized)
       ? SizedBox.expand(
