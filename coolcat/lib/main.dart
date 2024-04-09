@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "coolcat",
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black),
       home: const Scaffold(
         body: Stack(

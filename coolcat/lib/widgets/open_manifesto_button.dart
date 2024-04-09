@@ -39,11 +39,12 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
+            SizedBox(
+              width: 50.0,
               height: isMobile ? 24 : 36,
-              alignment: Alignment.topCenter,
               child: Text(
                 '^',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: isMobile ? 32 : 48,
                   color: Colors.white,

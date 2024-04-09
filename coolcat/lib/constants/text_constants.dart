@@ -30,7 +30,7 @@ class TextConstants {
                 "Then i cooded and wroote this smool manifestoo too shoow my visioon.\n\n\n"
         ),
         TextSpan(
-          text: "2. VISION\n\n",
+          text: "2. VISIOON\n\n",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         TextSpan(
