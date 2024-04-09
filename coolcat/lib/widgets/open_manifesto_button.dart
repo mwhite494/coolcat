@@ -4,8 +4,29 @@ import 'package:coolcat/constants/index.dart' show NumberConstants;
 import 'package:coolcat/widgets/index.dart' show HoverButton, Manifesto;
 import 'package:flutter/material.dart';
 
-class OpenManifestoButton extends StatelessWidget {
+class OpenManifestoButton extends StatefulWidget {
   const OpenManifestoButton({super.key});
+
+  @override
+  OpenManifestoButtonState createState() => OpenManifestoButtonState();
+}
+
+class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerProviderStateMixin {
+  late AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = BottomSheet.createAnimationController(this);
+    animationController.duration = const Duration(milliseconds: 500);
+    animationController.reverseDuration = const Duration(milliseconds: 500);
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +79,7 @@ class OpenManifestoButton extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
+      transitionAnimationController: animationController,
       constraints: const BoxConstraints(
         maxWidth: double.infinity
       ),
