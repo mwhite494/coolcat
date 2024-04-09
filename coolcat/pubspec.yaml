@@ -57,6 +57,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/coolcat.jpeg
     - assets/images/telegram_logo.png.webp
     - assets/images/x_logo.png
     - assets/videos/catvideo.mp4

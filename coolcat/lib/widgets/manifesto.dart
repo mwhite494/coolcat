@@ -23,9 +23,20 @@ class Manifesto extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                    child: RichText(
-                      text: TextConstants.manifesto(24),
-                    ),
+                    child: Column (
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 48.0),
+                          child: CircleAvatar(
+                            radius: 100,
+                            backgroundImage: AssetImage('assets/images/coolcat.jpeg'),
+                          ),
+                        ),
+                        RichText(
+                          text: TextConstants.manifesto(24),
+                        ),
+                      ],
+                    )
                   )
                 ),
               ),
@@ -33,6 +44,8 @@ class Manifesto extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: IconButton(
                   icon: const Icon(Icons.close, color: Colors.white),
+                  iconSize: 32.0,
+                  padding: const EdgeInsets.all(12),
                   hoverColor: Colors.transparent,
                   onPressed: () => Navigator.of(context).pop(), // Close the modal
                 ),
