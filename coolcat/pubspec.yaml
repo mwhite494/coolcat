@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_svg: ^2.0.10+1
   url_launcher: ^6.2.5
   video_player: ^2.8.5
 
@@ -58,8 +59,8 @@ flutter:
 
   assets:
     - assets/images/coolcat.jpeg
-    - assets/images/telegram_logo.png.webp
-    - assets/images/x_logo.png
+    - assets/svg/x_logo.svg
+    - assets/svg/telegram_logo.svg
     - assets/videos/catvideo.mp4
     - assets/videos/catvideo_reversed.mp4
 

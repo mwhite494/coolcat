@@ -1,6 +1,5 @@
-import 'dart:math';
-
-import 'package:coolcat/constants/index.dart' show NumberConstants;
+import 'package:coolcat/constants/index.dart' show NumberConstants, ShadowConstants;
+import 'package:coolcat/utils/index.dart' show ResponsiveUtils;
 import 'package:coolcat/widgets/index.dart' show HoverButton, Manifesto;
 import 'package:flutter/material.dart';
 
@@ -30,9 +29,7 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    bool isMobile = ResponsiveUtils.isMobile(context);
     double fontSize = isMobile ? NumberConstants.textButtonFontSizeSmall : NumberConstants.textButtonFontSizeLarge;
 
     return Align(
@@ -51,6 +48,7 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
                   fontSize: isMobile ? 32 : 48,
                   color: Colors.white,
                   fontFamily: 'GloriaHallelujah',
+                  shadows: ShadowConstants.shadowHeavy
                 ),
               ),
             ),
@@ -64,6 +62,7 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
                     fontSize: fontSize,
                     color: Colors.white,
                     fontFamily: 'GloriaHallelujah',
+                    shadows: ShadowConstants.shadowHeavy
                   ),
                 ),
               )

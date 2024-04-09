@@ -1,7 +1,6 @@
-import 'dart:math';
-
-import 'package:coolcat/constants/index.dart' show NumberConstants;
-import 'package:coolcat/widgets/index.dart' show HoverButton;
+import 'package:coolcat/constants/index.dart' show NumberConstants, ShadowConstants;
+import 'package:coolcat/utils/index.dart' show ResponsiveUtils;
+import 'package:coolcat/widgets/index.dart' show HoverButton, SvgIcon;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,8 +14,8 @@ class LinkButtonsRow extends StatelessWidget {
       children: [
         _TextLinkButton(text: "BUY", url: "https://jup.ag/swap/SOL-CooL79s3d23Zd2RfMXTRmUnfbAWBt4H6thn4sVkmYR9h"),
         _TextLinkButton(text: "CHART", url: "https://dexscreener.com/solana/3v6bfpfttdmvua5d9kalxrm1z7bt5hsbtkcqeg2ueiu4"),
-        _IconLinkButton(imagePath: "assets/images/x_logo.png", url: "https://twitter.com/coolcat_sol"),
-        _IconLinkButton(imagePath: "assets/images/telegram_logo.png.webp", url: "https://t.me/coolcatonsolana"),
+        _IconLinkButton(svgPath: "assets/svg/x_logo.svg", url: "https://twitter.com/coolcat_sol"),
+        _IconLinkButton(svgPath: "assets/svg/telegram_logo.svg", url: "https://t.me/coolcatonsolana"),
       ],
     );
   }
@@ -30,9 +29,7 @@ class _TextLinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    bool isMobile = ResponsiveUtils.isMobile(context);
     double fontSize = isMobile ? NumberConstants.textButtonFontSizeSmall : NumberConstants.textButtonFontSizeLarge;
     
     return HoverButton(
@@ -45,6 +42,7 @@ class _TextLinkButton extends StatelessWidget {
             fontSize: fontSize,
             color: Colors.white,
             fontFamily: 'GloriaHallelujah',
+            shadows: ShadowConstants.shadowHeavy,
           ),
         ),
       )
@@ -53,10 +51,10 @@ class _TextLinkButton extends StatelessWidget {
 }
 
 class _IconLinkButton extends StatelessWidget {
-  final String imagePath;
+  final String svgPath;
   final String url;
 
-  const _IconLinkButton({required this.imagePath, required this.url});
+  const _IconLinkButton({required this.svgPath, required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +63,7 @@ class _IconLinkButton extends StatelessWidget {
       onPressed: () => _launchURL(url),
       child: Padding(
         padding: const EdgeInsets.all(18),
-        child: Image.asset(
-          imagePath,
-          width: 24,
-          height: 24,
-        ),
+        child: SvgIcon(svgPath: svgPath),
       )
     );
   }

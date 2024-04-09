@@ -1,6 +1,5 @@
-import 'dart:math';
-
-import 'package:coolcat/constants/index.dart' show NumberConstants;
+import 'package:coolcat/constants/index.dart' show NumberConstants, ShadowConstants;
+import 'package:coolcat/utils/index.dart' show ResponsiveUtils;
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -9,9 +8,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    bool isMobile = min(screenWidth, screenHeight) < NumberConstants.mobileScreenWidthThreshold;
+    bool isMobile = ResponsiveUtils.isMobile(context);
     double fontSize = isMobile ? NumberConstants.headerFontSizeSmall : NumberConstants.headerFontSizeLarge;
 
     return Align(
@@ -24,6 +21,7 @@ class Header extends StatelessWidget {
             fontSize: fontSize, // Adjust the font size as needed
             color: Colors.white, // Set the text color to white
             fontFamily: 'GloriaHallelujah', // Use your custom font
+            shadows: ShadowConstants.shadowHeavy,
           ),
         ),
       ),
