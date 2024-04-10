@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class SvgIcon extends StatelessWidget {
   final String svgPath;
   final double size;
-  final bool showShadow;
+  final String svgShadowPath;
 
   const SvgIcon({
     super.key,
     required this.svgPath,
     this.size = 24,
-    this.showShadow = true
+    this.svgShadowPath = ''
   });
 
   @override
@@ -18,23 +18,21 @@ class SvgIcon extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: <Widget>[
-        showShadow
+        svgShadowPath.isNotEmpty
           ? Positioned(
             left: 2,
             top: 2,
             child: SvgPicture.asset(
-              svgPath,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.srcIn),
+              svgShadowPath,
               width: size,
-              height: size,
+              height: size
             ),
           )
           : Container(),
         SvgPicture.asset(
           svgPath,
           width: size,
-          height: size,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          height: size
         ),
       ],
     );

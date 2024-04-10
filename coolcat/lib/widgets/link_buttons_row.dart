@@ -14,8 +14,8 @@ class LinkButtonsRow extends StatelessWidget {
       children: [
         _TextLinkButton(text: "BUY", url: "https://jup.ag/swap/SOL-CooL79s3d23Zd2RfMXTRmUnfbAWBt4H6thn4sVkmYR9h"),
         _TextLinkButton(text: "CHART", url: "https://dexscreener.com/solana/3v6bfpfttdmvua5d9kalxrm1z7bt5hsbtkcqeg2ueiu4"),
-        _IconLinkButton(svgPath: "assets/svg/x_logo.svg", url: "https://twitter.com/coolcat_sol"),
-        _IconLinkButton(svgPath: "assets/svg/telegram_logo.svg", url: "https://t.me/coolcatonsolana"),
+        _IconLinkButton(svgPath: "assets/svg/x_logo.svg", svgShadowPath: "assets/svg/x_logo_shadow.svg", url: "https://twitter.com/coolcat_sol"),
+        _IconLinkButton(svgPath: "assets/svg/telegram_logo.svg", svgShadowPath: "assets/svg/telegram_logo_shadow.svg", url: "https://t.me/coolcatonsolana"),
       ],
     );
   }
@@ -52,9 +52,10 @@ class _TextLinkButton extends StatelessWidget {
 
 class _IconLinkButton extends StatelessWidget {
   final String svgPath;
+  final String svgShadowPath;
   final String url;
 
-  const _IconLinkButton({required this.svgPath, required this.url});
+  const _IconLinkButton({required this.svgPath, this.svgShadowPath = '', required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class _IconLinkButton extends StatelessWidget {
       onPressed: () => _launchURL(url),
       child: Padding(
         padding: const EdgeInsets.all(18),
-        child: SvgIcon(svgPath: svgPath),
+        child: SvgIcon(svgPath: svgPath, svgShadowPath: svgShadowPath),
       )
     );
   }

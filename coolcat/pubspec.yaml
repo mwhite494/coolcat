@@ -60,7 +60,9 @@ flutter:
   assets:
     - assets/images/coolcat.jpeg
     - assets/svg/x_logo.svg
+    - assets/svg/x_logo_shadow.svg
     - assets/svg/telegram_logo.svg
+    - assets/svg/telegram_logo_shadow.svg
     - assets/videos/catvideo.mp4
     - assets/videos/catvideo_reversed.mp4
 

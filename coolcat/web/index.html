@@ -42,12 +42,12 @@
 <body>
   <script>
     window.addEventListener('load', function(ev) {
-      // Dynamically determine the renderer based on the browser or other conditions
-      var renderer = 'canvaskit'; // Default to CanvasKit
-      if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-        // Use HTML renderer for Firefox due to specific issues
-        renderer = 'html';
-      }
+      /*
+       * Using html renderer (opposed to default canvaskit) because it fixes the following issues:
+       * 1. Video transitions don't work on Firefox when rendering with canvaskit
+       * 2. Image blur doesn't render correctly when using canvaskit
+       */
+      var renderer = 'html';
       
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
