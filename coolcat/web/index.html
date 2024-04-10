@@ -42,6 +42,13 @@
 <body>
   <script>
     window.addEventListener('load', function(ev) {
+      // Dynamically determine the renderer based on the browser or other conditions
+      var renderer = 'canvaskit'; // Default to CanvasKit
+      if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        // Use HTML renderer for Firefox due to specific issues
+        renderer = 'html';
+      }
+      
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
@@ -49,14 +56,7 @@
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine({
-            /* 
-            * Specifying to have the renderer be html opposed to CanvasKit (default for Flutter web apps)
-            * Benefits:
-            * 1. This reduces the size of the web app
-            * 2. Provides better SEO
-            * 3. Fixes bugs related to the "boomerang" video effect on Firefox
-            */
-            renderer: 'html',
+            renderer: renderer,
           }).then(function(appRunner) {
             appRunner.runApp();
           });

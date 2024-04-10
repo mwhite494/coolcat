@@ -1,4 +1,3 @@
-import 'package:coolcat/constants/index.dart' show NumberConstants;
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -90,7 +89,7 @@ class BackgroundVideoState extends State<BackgroundVideo> {
         });
 
         // Introduce a delay before seeking to give time for the UI to update
-        Future.delayed(Duration(milliseconds: 100), () {
+        Future.delayed(const Duration(milliseconds: 200), () {
           // Ensure the widget is still mounted before updating the state
           if (mounted) {
             currentController.pause().then((_) {
