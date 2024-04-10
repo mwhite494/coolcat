@@ -19,6 +19,13 @@ class BackgroundVideoState extends State<BackgroundVideo> {
     _initializeVideoControllers();
   }
 
+  Future<void> _preloadVideo(VideoPlayerController controller) async {
+    await controller.play();
+    await Future.delayed(const Duration(milliseconds: 100)); // Gives a brief moment for video to start buffering
+    await controller.pause();
+    await controller.seekTo(Duration.zero);
+  }
+
   Future<void> _initializeVideoControllers() async {
     try {
       _forwardController = VideoPlayerController.asset('assets/videos/catvideo.mp4');
@@ -32,6 +39,8 @@ class BackgroundVideoState extends State<BackgroundVideo> {
       // Video must be muted for autoplay to work on Chrome
       _forwardController.setVolume(0);
       _reverseController.setVolume(0);
+
+      await _preloadVideo(_reverseController);
 
       setState(() {
         // print('Both controllers initialized');
