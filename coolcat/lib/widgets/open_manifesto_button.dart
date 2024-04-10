@@ -36,28 +36,29 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: EdgeInsets.only(bottom: isMobile ? NumberConstants.paddingBottomSmall : NumberConstants.paddingBottomLarge),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SizedBox(
-              width: 50.0,
-              height: isMobile ? 24 : 36,
-              child: Text(
-                '^',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: isMobile ? 32 : 48,
-                  color: Colors.white,
-                  fontFamily: 'GloriaHallelujah',
-                  shadows: ShadowConstants.shadowHeavy
+        child: HoverButton(
+          onPressed: () => _showManifesto(context),
+          child: SizedBox(
+            width: isMobile ? 168 : 240,
+            height: isMobile ? 72 : 96,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50.0,
+                  height: isMobile ? 24 : 36,
+                  child: Text(
+                    '^',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: isMobile ? 32 : 48,
+                      color: Colors.white,
+                      fontFamily: 'GloriaHallelujah',
+                      shadows: ShadowConstants.shadowHeavy
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            HoverButton(
-              onPressed: () => showManifesto(context),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-                child: Text(
+                Text(
                   'MANIFESTO',
                   style: TextStyle(
                     fontSize: fontSize,
@@ -66,15 +67,15 @@ class OpenManifestoButtonState extends State<OpenManifestoButton> with TickerPro
                     shadows: ShadowConstants.shadowHeavy
                   ),
                 ),
-              )
-            )
-          ],
-        ),
+              ],
+            ),
+          ),
+        )
       )
     );
   }
 
-  void showManifesto(BuildContext context) {
+  void _showManifesto(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
